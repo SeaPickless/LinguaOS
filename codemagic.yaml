@@ -1,130 +1,15 @@
-# ─────────────────────────────────────────────────────────────────────────────
-# LinguaOS — Codemagic CI/CD
-# Builds a debug APK on every push, and a signed release APK on version tags.
-# Docs: https://docs.codemagic.io/yaml-basic-configuration/
-# ─────────────────────────────────────────────────────────────────────────────
-
 workflows:
-
-  # ── 1. Debug build — runs on every push ───────────────────────────────────
-  debug-build:
-    name: Debug APK
-    max_build_duration: 60        # minutes
-    instance_type: mac_mini_m1    # fastest free tier
-
+  android-debug:
+    name: LinguaOS Debug Build
+    max_build_duration: 30
     environment:
       java: 21
-      # No signing needed for debug
-      vars:
-        PACKAGE_NAME: "com.linguaos.app"
-
-    triggering:
-      events:
-        - push
-      branch_patterns:
-        - pattern: '*'
-          include: true
-          source: true
-
     scripts:
+      - name: Set Android SDK path
+        script: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
       - name: Set Gradle permissions
         script: chmod +x gradlew
-
       - name: Build debug APK
-        script: |
-          ./gradlew assembleDebug \
-            --no-daemon \
-            --stacktrace \
-            -Porg.gradle.jvmargs="-Xmx3g -XX:+UseG1GC"
-
+        script: ./gradlew assembleDebug --no-daemon
     artifacts:
-      - app/build/outputs/apk/debug/app-debug.apk
-      - app/build/outputs/mapping/**          # ProGuard maps (empty for debug)
-
-    publishing:
-      email:
-        recipients:
-          - your@email.com                    # ← replace with your email
-        notify:
-          success: true
-          failure: true
-
-  # ── 2. Release build — runs on version tags (e.g. v1.0.0) ─────────────────
-  release-build:
-    name: Release APK (Signed)
-    max_build_duration: 60
-    instance_type: mac_mini_m1
-
-    environment:
-      java: 21
-      # Store these in Codemagic → App settings → Environment variables
-      # Mark them as "Secret" so they are not logged.
-      vars:
-        PACKAGE_NAME: "com.linguaos.app"
-      android_signing:
-        - linguaos_keystore             # name of the keystore you upload in Codemagic UI
-
-    triggering:
-      events:
-        - tag
-      tag_patterns:
-        - pattern: 'v*'
-          include: true
-
-    scripts:
-      - name: Set Gradle permissions
-        script: chmod +x gradlew
-
-      - name: Set version from tag
-        script: |
-          TAG="${CM_TAG:-v1.0.0}"
-          VERSION_NAME="${TAG#v}"                     # strip leading 'v'
-          VERSION_CODE=$(echo "$VERSION_NAME" | awk -F. '{printf "%d%02d%02d", $1, $2, $3}')
-          echo "Building $VERSION_NAME ($VERSION_CODE)"
-          # Inject into build via Gradle properties
-          echo "VERSION_NAME=$VERSION_NAME" >> local.properties
-          echo "VERSION_CODE=$VERSION_CODE" >> local.properties
-
-      - name: Build release APK
-        script: |
-          ./gradlew assembleRelease \
-            --no-daemon \
-            --stacktrace \
-            -Porg.gradle.jvmargs="-Xmx3g -XX:+UseG1GC"
-
-      - name: Sign APK (via Codemagic auto-signing)
-        script: |
-          # Codemagic automatically signs when android_signing is set above.
-          # This step is a no-op placeholder — signing happens at build time.
-          echo "APK signed by Codemagic keystore manager."
-
-    artifacts:
-      - app/build/outputs/apk/release/app-release.apk
-      - app/build/outputs/apk/release/app-release-unsigned.apk
-      - app/build/outputs/mapping/release/mapping.txt
-
-    publishing:
-      email:
-        recipients:
-          - your@email.com                    # ← replace with your email
-        notify:
-          success: true
-          failure: true
-      # Uncomment to publish to Google Play when ready:
-      # google_play:
-      #   credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-      #   track: internal
-      #   submit_as_draft: true
-
-# ─────────────────────────────────────────────────────────────────────────────
-# HOW TO SET UP
-# ─────────────────────────────────────────────────────────────────────────────
-# 1. Push this repo to GitHub / GitLab / Bitbucket.
-# 2. Go to https://codemagic.io → Add application → point to your repo.
-# 3. Codemagic will auto-detect this file and show both workflows.
-# 4. For the release build, upload your .jks keystore under:
-#    App settings → Code signing → Android keystores → Add keystore
-#    Name it "linguaos_keystore" (matches android_signing above).
-# 5. Set your email in the publishing sections above.
-# 6. Push a tag like  git tag v1.0.0 && git push --tags  to trigger a release.
-# ─────────────────────────────────────────────────────────────────────────────
+      - app/build/outputs/apk/debug/*.apk
