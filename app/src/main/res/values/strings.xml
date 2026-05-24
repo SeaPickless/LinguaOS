@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LinguaOS</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Welcome to LinguaOS</string>
+    <string name="onboarding_welcome_subtitle">Learn any language, anytime, offline.</string>
+    <string name="onboarding_step_ui_language">What language do you speak?</string>
+    <string name="onboarding_step_target_language">What do you want to learn?</string>
+    <string name="onboarding_step_target_locked_hint">You can add more languages after reaching Upper Intermediate (B2) in your first course.</string>
+    <string name="onboarding_step_account">Create your profile</string>
+    <string name="onboarding_step_goal">Set your daily goal</string>
+    <string name="onboarding_btn_continue">Continue</string>
+    <string name="onboarding_btn_get_started">Get Started</string>
+
+    <!-- Auth -->
+    <string name="auth_username">Username</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_login">Log In</string>
+    <string name="auth_register">Create Account</string>
+    <string name="auth_forgot_password">Forgot password?</string>
+    <string name="auth_no_account">Don\'t have an account?</string>
+    <string name="auth_have_account">Already have an account?</string>
+    <string name="auth_error_username_empty">Username cannot be empty</string>
+    <string name="auth_error_password_short">Password must be at least 6 characters</string>
+    <string name="auth_error_username_taken">Username is already taken</string>
+    <string name="auth_error_invalid_credentials">Invalid username or password</string>
+    <string name="auth_error_username_invalid">Username can only contain letters, numbers, and underscores</string>
+    <string name="auth_reset_title">Reset Password</string>
+    <string name="auth_reset_new_password">New Password</string>
+    <string name="auth_reset_confirm">Confirm Password</string>
+    <string name="auth_reset_mismatch">Passwords do not match</string>
+    <string name="auth_reset_different_device">Cannot recover on a different device</string>
+    <string name="auth_reset_success">Password reset successfully</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_greeting_morning">Good morning</string>
+    <string name="dashboard_greeting_afternoon">Good afternoon</string>
+    <string name="dashboard_greeting_evening">Good evening</string>
+    <string name="dashboard_streak_days">%d day streak</string>
+    <string name="dashboard_xp_label">%d XP</string>
+    <string name="dashboard_xp_to_next">%d XP to next rank</string>
+    <string name="dashboard_active_course">Active Course</string>
+    <string name="dashboard_continue_learning">Continue Learning</string>
+    <string name="dashboard_no_course">No course selected</string>
+    <string name="dashboard_units">Units</string>
+    <string name="dashboard_switch_course">Switch Course</string>
+
+    <!-- Units -->
+    <string name="unit_basics">Basics</string>
+    <string name="unit_travel">Travel</string>
+    <string name="unit_food_drink">Food &amp; Drink</string>
+    <string name="unit_family">Family</string>
+    <string name="unit_work_school">Work &amp; School</string>
+    <string name="unit_shopping">Shopping</string>
+    <string name="unit_health">Health</string>
+    <string name="unit_nature">Nature</string>
+    <string name="unit_culture">Culture</string>
+    <string name="unit_advanced">Advanced</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_stats">Stats</string>
+    <string name="profile_xp_total">Total XP</string>
+    <string name="profile_courses_enrolled">Courses Enrolled</string>
+    <string name="profile_words_learned">Words Learned</string>
+    <string name="profile_quizzes_completed">Quizzes Completed</string>
+    <string name="profile_current_rank">Current Rank</string>
+    <string name="profile_logout">Log Out</string>
+    <string name="profile_switch_user">Switch User</string>
+    <string name="profile_language_progress">Language Progress</string>
+
+    <!-- Ranks -->
+    <string name="rank_newcomer">Newcomer</string>
+    <string name="rank_beginner">Beginner</string>
+    <string name="rank_elementary">Elementary</string>
+    <string name="rank_intermediate">Intermediate</string>
+    <string name="rank_upper_intermediate">Upper Intermediate</string>
+    <string name="rank_advanced">Advanced</string>
+    <string name="rank_expert">Expert</string>
+    <string name="rank_master">Master</string>
+    <string name="rank_legend">Legend</string>
+
+    <!-- CEFR -->
+    <string name="cefr_a1">A1 Beginner</string>
+    <string name="cefr_a2">A2 Elementary</string>
+    <string name="cefr_b1">B1 Intermediate</string>
+    <string name="cefr_b2">B2 Upper Intermediate</string>
+    <string name="cefr_c1">C1 Advanced</string>
+
+    <!-- Goals -->
+    <string name="goal_casual">Casual — 5 min/day</string>
+    <string name="goal_regular">Regular — 10 min/day</string>
+    <string name="goal_serious">Serious — 15 min/day</string>
+    <string name="goal_intense">Intense — 20 min/day</string>
+
+    <!-- General -->
+    <string name="btn_next">Next</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_confirm">Confirm</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="loading">Loading…</string>
+    <string name="search_hint">Search languages…</string>
+</resources>
