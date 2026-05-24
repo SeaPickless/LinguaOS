@@ -1,5 +1,5 @@
 workflows:
-  android-debug:
+  debug-build:
     name: LinguaOS Debug Build
     max_build_duration: 30
     environment:
@@ -13,3 +13,18 @@ workflows:
         script: ./gradlew assembleDebug --no-daemon
     artifacts:
       - app/build/outputs/apk/debug/*.apk
+
+  release-build:
+    name: LinguaOS Release Build
+    max_build_duration: 30
+    environment:
+      java: 21
+    scripts:
+      - name: Set Android SDK path
+        script: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+      - name: Set Gradle permissions
+        script: chmod +x gradlew
+      - name: Build release APK
+        script: ./gradlew assembleRelease --no-daemon
+    artifacts:
+      - app/build/outputs/apk/release/*.apk
